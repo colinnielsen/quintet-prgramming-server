@@ -4,7 +4,7 @@ const morgan = require("morgan");
 const app = express();
 const cors = require('cors')
 
-const resolutions = require("./routes/resolutions");
+const jokes = require("./routes/JokeRoutes");
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({
@@ -20,7 +20,8 @@ function notFound(req, res, next) {
     res.status(404).send({error: 'Url not found', status: 404, url})
   }
 
-app.use("/resolutions", resolutions);
+
+app.use("/jokes", jokes);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -37,5 +38,7 @@ app.use((err, req, res, next) => {
       error: req.app.get("env") === "development" ? err.stack : {}
     });
 });
+
+
 
 module.exports = app;
